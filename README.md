@@ -2,7 +2,7 @@
 
 Built on [Baileys](https://github.com/WhiskeySockets/Baileys) + [baileys-antiban](https://github.com/kobie3717/baileys-antiban). TypeScript, no database server, no native deps.
 
-**Highlights:** group moderation & admin tools · auto-delete stickers (and other types) when an admin enables it · anti-link / anti-spam / bad-word filters · warnings with auto-kick · welcome/goodbye · **owner → superadmin → admin → user** roles where the owner decides what each tier may do · LID-safe identity · modular + documented.
+**Highlights:** group moderation & admin tools · auto-delete stickers (and other types) when an admin enables it · anti-link / anti-spam / bad-word filters · warnings with auto-kick · welcome/goodbye · **owner → superadmin → admin → user** roles where the owner decides what each tier may do · LID-safe identity · modular + documented · **fixed-interval WhatsApp Channel poster** (tech/science/security news, blogs, free courses).
 
 ## Quick start
 ```bash
@@ -22,6 +22,9 @@ Add the bot to a group and **make it admin** (needed to delete/kick).
 
 Full list: [docs/COMMANDS.md](docs/COMMANDS.md).
 
+## Channel auto-poster (optional)
+Set `CHANNEL_ENABLED`/`CHANNEL_JID` or use `.channel set <link>` then `.channel on`. One post per fixed interval (default 3 h, ≥30 min enforced, ≤12/day, quiet hours, deduped, source-attributed). Details: [docs/08-CHANNEL.md](docs/08-CHANNEL.md).
+
 ## Scripts
 `npm start` · `npm run dev` (watch) · `npm run check` (types) · `npm test` · `npm run docs` (regenerate COMMANDS.md) · `npm run build` + `npm run start:prod`
 
@@ -36,6 +39,7 @@ Full list: [docs/COMMANDS.md](docs/COMMANDS.md).
 | [05 Moderation](docs/05-MODERATION.md) | every protection |
 | [06 Owner guide](docs/06-OWNER-ADMIN.md) | owner recipes |
 | [07 Anti-ban](docs/07-ANTIBAN-INTEGRATION.md) | integration + library quirks + risks |
+| [08 Channel poster](docs/08-CHANNEL.md) | feeds, safe-posting rules, free courses |
 | [HANDOFF](docs/HANDOFF.md) | status & how to resume |
 
 ## Troubleshooting

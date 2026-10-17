@@ -35,6 +35,20 @@ export const config = {
     addPer10Min: num(process.env.MAX_ADDS_PER_10MIN, 3),
     removePer10Min: num(process.env.MAX_KICKS_PER_10MIN, 10),
   },
+  /** WhatsApp Channel auto-poster. These only SEED data/channel.json on first run; afterwards use `.channel ...` */
+  channel: {
+    enabled: bool(process.env.CHANNEL_ENABLED, false),
+    jid: (process.env.CHANNEL_JID || '').trim(),
+    intervalMin: num(process.env.CHANNEL_INTERVAL_MIN, 180),
+    maxPerDay: num(process.env.CHANNEL_MAX_PER_DAY, 6),
+    quiet: (process.env.CHANNEL_QUIET_HOURS ?? '23-6').trim(),
+    tz: process.env.CHANNEL_TZ || 'Africa/Lagos',
+    review: bool(process.env.CHANNEL_REVIEW, false),
+    fetchEveryMin: num(process.env.CHANNEL_FETCH_EVERY_MIN, 60),
+    maxAgeHours: num(process.env.CHANNEL_MAX_AGE_HOURS, 48),
+    courseMaxAgeHours: num(process.env.CHANNEL_COURSE_MAX_AGE_HOURS, 6),
+    courseMaxPerDay: num(process.env.CHANNEL_COURSE_MAX_PER_DAY, 2),
+  },
   antiban: {
     preset: (process.env.ANTIBAN_PRESET || 'moderate') as 'conservative' | 'moderate' | 'aggressive' | 'high-volume',
     warmupDays: num(process.env.ANTIBAN_WARMUP_DAYS, 0),

@@ -41,8 +41,9 @@ Read this first. Every other doc zooms into one box of this picture.
 | `src/services/send.ts`, `util.ts` | send outside a message context; parsers |
 | `src/modules/*/index.ts` | features (see `04-MODULES.md`) |
 | `src/modules/protection/filters.ts` | passive filters |
+| `src/modules/channel/*` | channel poster: `feeds.ts` RSS, `engine.ts` scheduler logic, `store.ts` state, `index.ts` command |
 | `scripts/gen-docs.ts` | regenerates `docs/COMMANDS.md` |
-| `tests/` | fake-socket harness + 35 tests |
+| `tests/` | fake-socket harness + 49 tests |
 
 ## Key design decisions (and why)
 

@@ -12,6 +12,7 @@ Only numbers in `OWNER_NUMBERS` (or `OWNER_LIDS`, or the bot's own account when 
 |---|---|
 | People | `.addsuper`, `.delsuper`, `.supers`, `.ban`, `.unban`, `.banlist` |
 | Policy | `.perms`, `.setrole`, `.resetrole`, `.superfeatures [add\|remove X]`, `.userfeatures [add\|remove X]` |
+| Channel | `.channel …` (see `08-CHANNEL.md`; delegate with `.superfeatures add channel`) |
 | Bot | `.setprefix`, `.mode public\|private`, `.health`, `.groups`, `.leave [id]`, `.shutdown` |
 
 (`.addsuper/.delsuper/.setrole/.resetrole/.superfeatures/.userfeatures/.setprefix/.shutdown` are owner-locked.)

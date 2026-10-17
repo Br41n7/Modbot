@@ -11,6 +11,7 @@ import { protectionModule } from './protection/index.js';
 import { warningsModule } from './warnings/index.js';
 import { welcomeModule } from './welcome/index.js';
 import { ownerModule } from './owner/index.js';
+import { channelModule } from './channel/index.js';
 
 export const allModules: BotModule[] = [
   generalModule,
@@ -19,4 +20,5 @@ export const allModules: BotModule[] = [
   warningsModule,
   welcomeModule,
   ownerModule,
+  channelModule,
 ];

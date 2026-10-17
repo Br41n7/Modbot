@@ -10,8 +10,11 @@ A **module** (`BotModule`) bundles `commands`, `filters` and/or a `group-partici
 | warnings | `modules/warnings` | warn, unwarn, warns, resetwarn, mywarns |
 | welcome | `modules/welcome` | welcome/goodbye messages |
 | owner | `modules/owner` | owner control panel |
+| channel | `modules/channel` | WhatsApp Channel auto-poster (`docs/08-CHANNEL.md`) |
 
 Full per-command table: **`docs/COMMANDS.md`** (auto-generated).
+
+`BotModule.init(env)` runs once at startup — use it to start timers (see `modules/channel`); read `env.sock`/`env.safe` lazily because they are replaced on reconnect.
 
 ## Add a command (5 steps)
 1. Pick/create `src/modules/<name>/index.ts`.

@@ -126,4 +126,6 @@ export interface BotModule {
   commands?: Command[];
   filters?: Filter[];
   onGroupParticipants?(env: BotEnv, ev: GroupParticipantsEvent): Promise<void>;
+  /** Called ONCE at startup, before the first connection. Start timers here; read env.sock/env.safe lazily (they change on reconnect). */
+  init?(env: BotEnv): void;
 }

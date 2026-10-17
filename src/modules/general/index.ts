@@ -10,7 +10,7 @@ import { ROLE_RANK } from '../../core/types.js';
 import { isLid, userPart } from '../../core/jid.js';
 import { formatUptime } from '../../services/util.js';
 
-const ICON: Record<string, string> = { general: '📖', groupAdmin: '🛡️', protection: '🧱', warnings: '⚠️', welcome: '👋', owner: '👑' };
+const ICON: Record<string, string> = { general: '📖', groupAdmin: '🛡️', protection: '🧱', warnings: '⚠️', welcome: '👋', owner: '👑', channel: '📡' };
 
 const help: Command = {
   name: 'help', aliases: ['menu', 'commands'], defaultRole: 'user',

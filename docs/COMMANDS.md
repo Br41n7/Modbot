@@ -113,6 +113,14 @@ Owner/superuser control panel: people, permission policy and bot controls.
 | `leave` | — | owner | any | Make the bot leave a group (run inside it, or give the group id). | `leave [group-id@g.us]` |
 | `shutdown` | `stop` | owner | 🔒locked | Stop the bot process (restart it from your host). | `shutdown` |
 
+## Module: `channel`
+
+WhatsApp Channel auto-poster: fixed-interval, rate-capped, deduplicated feed posts with an owner control command.
+
+| Command | Aliases | Default role | Scope | What it does | Usage |
+|---|---|---|---|---|---|
+| `channel` | — | owner | any | Manage the WhatsApp Channel auto-poster (tech/science/security news, blogs, free courses) at a fixed safe interval. | `channel [status|set|on|off|interval|max|quiet|review|queue|approve|skip|postnow|fetch|sources|test|feed|addfeed|delfeed]` |
+
 ## Feature keys (what `.setrole` / `.perms` use)
 
 | Feature | Default role | Commands |
@@ -127,6 +135,7 @@ Owner/superuser control panel: people, permission policy and bot controls.
 | `ban` | owner | `ban` |
 | `banlist` | owner | `banlist` |
 | `blocktype` | admin | `blocktype` `unblocktype` |
+| `channel` | owner | `channel` |
 | `del` | admin | `del` |
 | `delsuper` | owner 🔒 | `delsuper` |
 | `demote` | admin | `demote` |

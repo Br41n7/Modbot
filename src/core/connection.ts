@@ -54,6 +54,7 @@ export async function startBot() {
   const base = createEnvBase();
   const env = base as unknown as BotEnv;
   const dispatcher = new Dispatcher(env);
+  for (const m of env.registry.modules) m.init?.(env);
   let attempt = 0;
   let stopping = false;
 
