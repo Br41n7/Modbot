@@ -45,4 +45,3 @@ Full list: [docs/COMMANDS.md](docs/COMMANDS.md).
 - **Keep it running** → `pm2 start "npm start" --name modbot` (VPS) or `tmux`/Termux.
 
 ⚠️ Unofficial WhatsApp automation can lead to account bans. Use a number you can afford to lose and read docs/07.
-# Modbot
