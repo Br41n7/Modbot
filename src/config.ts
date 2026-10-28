@@ -20,7 +20,7 @@ const dataDir = path.resolve(process.env.DATA_DIR || './data');
 
 export const config = {
   botName: process.env.BOT_NAME || 'ModBot',
-  prefix: process.env.PREFIX || '.',
+  prefix: process.env.BOT_PREFIX || '.',
   ownerNumbers: list(process.env.OWNER_NUMBERS),
   ownerLids: list(process.env.OWNER_LIDS),
   selfIsOwner: bool(process.env.SELF_IS_OWNER, true),

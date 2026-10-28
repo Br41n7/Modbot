@@ -12,13 +12,16 @@ import { warningsModule } from './warnings/index.js';
 import { welcomeModule } from './welcome/index.js';
 import { ownerModule } from './owner/index.js';
 import { channelModule } from './channel/index.js';
-
+import { arcadeModule } from './arcade/index.js';
+/** import { bugModule } from './bug/index.js'; **/
 export const allModules: BotModule[] = [
   generalModule,
+  arcadeModule,
   groupAdminModule,
   protectionModule,
   warningsModule,
   welcomeModule,
   ownerModule,
   channelModule,
+/**  bugModule, **/
 ];

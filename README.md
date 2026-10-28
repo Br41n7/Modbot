@@ -49,3 +49,10 @@ Set `CHANNEL_ENABLED`/`CHANNEL_JID` or use `.channel set <link>` then `.channel 
 - **Keep it running** → `pm2 start "npm start" --name modbot` (VPS) or `tmux`/Termux.
 
 ⚠️ Unofficial WhatsApp automation can lead to account bans. Use a number you can afford to lose and read docs/07.
+
+
+## Neon Arcade feature release
+
+The `arcade` module adds original cyber/neon-styled features without importing implementation code from third-party bots. Commands include `.neon`, `.joke`, `.8ball`, `.truth`, `.dare`, `.ship @user @user`, `.riddle`, `.quiz`, `.answer`, `.score`, `.afk`, `.back`, and `.sticker` (send an image with `.sticker` as its caption). AFK and score data is stored in `data/arcade.json`.
+
+Sticker conversion requires the `ffmpeg` executable to be installed on the host (Termux: `pkg install ffmpeg`). This release converts still images only; animated/video sticker support is intentionally not included. The command prefix is configured with `BOT_PREFIX` to avoid colliding with Termux's built-in `PREFIX` environment variable.

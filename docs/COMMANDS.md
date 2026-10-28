@@ -181,3 +181,14 @@ WhatsApp Channel auto-poster: fixed-interval, rate-capped, deduplicated feed pos
 | `warns` | admin | `warns` |
 | `welcome` | admin | `welcome` `setwelcome` |
 | `whoami` | user | `whoami` |
+
+
+## Arcade (Neon feature release)
+
+| Command | Access | Description |
+|---|---|---|
+| `.neon` | everyone | Cyber/neon feature menu |
+| `.joke`, `.8ball`, `.truth`, `.dare`, `.ship` | everyone | Friendly fun commands |
+| `.riddle`, `.quiz`, `.answer`, `.score` | everyone | Riddles, tech quizzes and persistent points |
+| `.afk`, `.back` | everyone | Per-chat AFK status and mention notices |
+| `.sticker` | everyone | Convert a current still image to WebP; requires ffmpeg |
