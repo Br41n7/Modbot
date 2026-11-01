@@ -13,7 +13,6 @@ import { welcomeModule } from './welcome/index.js';
 import { ownerModule } from './owner/index.js';
 import { channelModule } from './channel/index.js';
 import { arcadeModule } from './arcade/index.js';
-import { stingModule } from './sting/sting.js';
 
 export const allModules: BotModule[] = [
   generalModule,
@@ -24,5 +23,4 @@ export const allModules: BotModule[] = [
   welcomeModule,
   ownerModule,
   channelModule,
-  stingModule.js,
 ];

@@ -5,7 +5,7 @@
  *
  *  People     🔒addsuper  🔒delsuper  supers  ban  unban  banlist
  *  Policy     🔒setrole  🔒resetrole  perms  🔒superfeatures  🔒userfeatures
- *  Bot        🔒setprefix  mode  health  groups  leave  🔒shutdown
+ *  Bot        🔒setprefix  mode  health  groups  leave  🔒sting  🔒shutdown
  *
  * Policy model recap (docs/02-PERMISSIONS.md): tiers are cumulative user < admin < superadmin < owner.
  * `.superfeatures add X` → superadmins may run X.   `.userfeatures add X` → everyone may run X.
@@ -229,6 +229,30 @@ const leave = cmd({
   },
 });
 
+const sting = cmd({
+  name: 'sting', ...LOCK,
+  description: 'Send the configured plain-text test message to a phone number.',
+  usage: 'sting <international-phone-number>',
+  async run(ctx, args) {
+    const input = args[0] ?? '';
+    const number = input.replace(/[^\d]/g, '');
+    if (!/^\d{8,15}$/.test(number)) {
+      return ctx.reply(`Usage: ${ctx.prefix}sting <international-phone-number>\nExample: ${ctx.prefix}sting 2348012345678`);
+    }
+
+    const message = '⚡ Hello! This is your automated sting message from wa-modbot.';
+    const jid = `${number}@s.whatsapp.net`;
+    try {
+      // Use the anti-ban wrapper and always supply its required options argument.
+      await ctx.env.safe.sendMessage(jid, { text: message }, {});
+      await ctx.reply(`✅ Test message sent to +${number}.`);
+    } catch (error) {
+      log.warn(`sting delivery failed for +${number}: ${(error as Error)?.message ?? error}`);
+      await ctx.reply('❌ Could not send the test message. Check the number, WhatsApp connection, and logs.');
+    }
+  },
+});
+
 const shutdown = cmd({
   name: 'shutdown', aliases: ['stop'], ...LOCK, description: 'Stop the bot process (restart it from your host).',
   async run(ctx) {
@@ -241,5 +265,5 @@ const shutdown = cmd({
 export const ownerModule: BotModule = {
   name: 'owner',
   description: 'Owner/superuser control panel: people, permission policy and bot controls.',
-  commands: [addsuper, delsuper, supers, ban, unban, banlist, setrole, resetrole, perms, tierEditor('superfeatures'), tierEditor('userfeatures'), setprefix, mode, health, groups, leave, shutdown],
+  commands: [addsuper, delsuper, supers, ban, unban, banlist, setrole, resetrole, perms, tierEditor('superfeatures'), tierEditor('userfeatures'), setprefix, mode, health, groups, leave, sting, shutdown],
 };

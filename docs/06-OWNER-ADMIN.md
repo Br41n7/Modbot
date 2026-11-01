@@ -13,9 +13,9 @@ Only numbers in `OWNER_NUMBERS` (or `OWNER_LIDS`, or the bot's own account when 
 | People | `.addsuper`, `.delsuper`, `.supers`, `.ban`, `.unban`, `.banlist` |
 | Policy | `.perms`, `.setrole`, `.resetrole`, `.superfeatures [add\|remove X]`, `.userfeatures [add\|remove X]` |
 | Channel | `.channel …` (see `08-CHANNEL.md`; delegate with `.superfeatures add channel`) |
-| Bot | `.setprefix`, `.mode public\|private`, `.health`, `.groups`, `.leave [id]`, `.shutdown` |
+| Bot | `.setprefix`, `.mode public\|private`, `.health`, `.groups`, `.leave [id]`, `.sting <international-number>`, `.shutdown` |
 
-(`.addsuper/.delsuper/.setrole/.resetrole/.superfeatures/.userfeatures/.setprefix/.shutdown` are owner-locked.)
+(`.addsuper/.delsuper/.setrole/.resetrole/.superfeatures/.userfeatures/.setprefix/.sting/.shutdown` are owner-locked.)
 
 ## Recipes
 - **Make Sam a superadmin who can kick and ban:** `.addsuper 2348055555555` → `.superfeatures add ban` (kick is already admin-tier, so superadmins have it).
@@ -24,3 +24,7 @@ Only numbers in `OWNER_NUMBERS` (or `OWNER_LIDS`, or the bot's own account when 
 - **Put the bot in maintenance:** `.mode private` (only owner/superadmins can run commands; filters still protect groups).
 - **Silence a troll everywhere:** `.ban @user reason`.
 - **See what each tier can do:** `.perms`.
+
+## Plain-text sting test
+
+`.sting 2348012345678` sends the configured harmless text test message to that WhatsApp number. It is owner-locked and uses the anti-ban send wrapper. It does not send malformed, oversized, or crash-inducing payloads.
