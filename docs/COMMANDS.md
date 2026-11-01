@@ -192,3 +192,8 @@ WhatsApp Channel auto-poster: fixed-interval, rate-capped, deduplicated feed pos
 | `.riddle`, `.quiz`, `.answer`, `.score` | everyone | Riddles, tech quizzes and persistent points |
 | `.afk`, `.back` | everyone | Per-chat AFK status and mention notices |
 | `.sticker` | everyone | Convert a current still image to WebP; requires ffmpeg |
+
+
+## Dynamic Neon command grid
+
+`.help`, `.menu`, `.commands`, `.neon` and `.funmenu` render the same live command grid. It groups registered commands by module, includes aliases and concise descriptions, and respects the caller's role, chat scope, and per-group disabled-feature settings. Use `.help <command>` for full usage and permission details.

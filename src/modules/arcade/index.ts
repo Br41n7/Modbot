@@ -7,6 +7,7 @@ import { downloadMediaMessage } from 'baileys';
 import type { BotModule, Command, Ctx, Filter } from '../../core/types.js';
 import { JsonStore } from '../../storage/jsonStore.js';
 import { config } from '../../config.js';
+import { buildMenuOverview, buildModuleMenu, resolveModule } from '../../core/commandMenu.js';
 
 const neon = (title: string, body: string) => `╭━━━〔 ⚡ N E O N 〔${title}〕 ⚡〕━━━╮\n${body}\n╰━━━━━━━━━━━━━━━━━━━━━━╯`;
 const jokes = [
@@ -36,15 +37,10 @@ const age = (ts: number) => { const mins = Math.max(0, Math.floor((Date.now() - 
 
 const menu: Command = {
   name: 'neon', aliases: ['funmenu'], defaultRole: 'user', description: 'Show the cyber/neon feature menu.',
-  async run(ctx) {
-    const p = ctx.prefix;
-    await ctx.reply(neon('SYSTEM MENU', [
-      '┌─〔 🎮 ARCADE 〕', `│ ${p}riddle • ${p}answer <answer>`, `│ ${p}quiz • ${p}answer <answer>`, `│ ${p}score`, '├─〔 🎭 CHAOS-GOOD 〕',
-      `│ ${p}joke • ${p}8ball <question>`, `│ ${p}ship @user @user`, `│ ${p}truth • ${p}dare`,
-      '├─〔 🧩 MEDIA 〕', `│ ${p}sticker (send with an image)`, '├─〔 🛰️ GROUP 〕',
-      `│ ${p}afk [reason] • ${p}back`, `│ ${p}groupinfo • ${p}rules`, '└─〔 SYSTEM 〕',
-      `  ${p}help • ${p}ping`, '', '◇ Be kind. Keep it fun. No spam or disruptive payloads.',
-    ].join('\n')));
+  usage: 'neon [category]',
+  async run(ctx, args) {
+    const mod = args[0] ? resolveModule(ctx, args[0]) : undefined;
+    await ctx.reply(mod ? buildModuleMenu(ctx, mod) : buildMenuOverview(ctx));
   },
 };
 

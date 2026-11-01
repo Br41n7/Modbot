@@ -6,23 +6,26 @@
  * Docs: docs/04-MODULES.md#general
  */
 import type { BotModule, Command } from '../../core/types.js';
-import { ROLE_RANK } from '../../core/types.js';
 import { isLid, userPart } from '../../core/jid.js';
 import { formatUptime } from '../../services/util.js';
+import { buildMenuOverview, buildModuleMenu, resolveModule } from '../../core/commandMenu.js';
 
-const ICON: Record<string, string> = { general: '📖', arcade: '⚡', groupAdmin: '🛡️', protection: '🧱', warnings: '⚠️', welcome: '👋', owner: '👑', channel: '📡' };
 
 const help: Command = {
   name: 'help', aliases: ['menu', 'commands'], defaultRole: 'user',
-  description: 'List the commands you can use, or details of one command.',
-  usage: 'help [command]',
+  description: 'List commands by category, or details of one command.',
+  usage: 'help [category|command]',
   async run(ctx, args) {
-    const { registry, policy, db } = ctx.env;
+    const { registry, policy } = ctx.env;
     const p = ctx.prefix;
 
     if (args[0]) {
+      // A category name wins over a command lookup (e.g. "owner" the category vs any command named "owner").
+      const mod = resolveModule(ctx, args[0]);
+      if (mod) return ctx.reply(buildModuleMenu(ctx, mod));
+
       const c = registry.find(args[0].replace(p, ''));
-      if (!c) return ctx.reply(`Unknown command "${args[0]}". Try ${p}help`);
+      if (!c) return ctx.reply(`Unknown command or category "${args[0]}". Try ${p}help`);
       const f = registry.featureOf(c);
       return ctx.reply(
         `*${p}${c.name}*${c.aliases?.length ? ` (${c.aliases.map((a) => p + a).join(', ')})` : ''}\n${c.description}\n` +
@@ -30,18 +33,7 @@ const help: Command = {
       );
     }
 
-    const disabled = ctx.isGroup ? db.settings(ctx.chat).disabled : [];
-    const byModule = new Map<string, string[]>();
-    for (const c of registry.commands) {
-      const f = registry.featureOf(c);
-      if (!policy.can(f, ctx.role)) continue;
-      if (disabled.includes(f) && ROLE_RANK[ctx.role] < ROLE_RANK.superadmin) continue;
-      if (c.groupOnly && !ctx.isGroup) continue;
-      if (c.privateOnly && ctx.isGroup) continue;
-      (byModule.get(c.module) ?? byModule.set(c.module, []).get(c.module)!).push(p + c.name);
-    }
-    const body = [...byModule.entries()].map(([m, cmds]) => `${ICON[m] ?? '•'} *${m}*\n${cmds.join('  ')}`).join('\n\n');
-    await ctx.reply(`🤖 *${ctx.env.config.botName}* — your role: *${ctx.role}*\n\n${body}\n\nDetails: ${p}help <command>`);
+    await ctx.reply(buildMenuOverview(ctx));
   },
 };
 
